@@ -1,13 +1,8 @@
 
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
-interface MapProps {
-  lat: number;
-  lng: number;
-}
-
-const Map = ({ lat, lng }: MapProps) => {
+const Map = ({ lat, lng }) => {
   // In a real app, you would integrate with Google Maps API
   // For now, we'll just show an iframe with Google Maps
   

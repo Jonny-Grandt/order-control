@@ -1,22 +1,10 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import enTranslations from '../locales/en';
 import svTranslations from '../locales/sv';
 
-// Define language types
-type LanguageCode = 'en' | 'sv';
-type Translations = typeof enTranslations;
-
-// Define context types
-interface LanguageContextType {
-  language: LanguageCode;
-  translations: Translations;
-  changeLanguage: (language: LanguageCode) => void;
-  t: (key: keyof Translations) => string;
-}
-
 // Create context with default values
-const LanguageContext = createContext<LanguageContextType>({
+const LanguageContext = createContext({
   language: 'sv',
   translations: svTranslations,
   changeLanguage: () => {},
@@ -27,11 +15,11 @@ const LanguageContext = createContext<LanguageContextType>({
 export const useLanguage = () => useContext(LanguageContext);
 
 // Language Provider component
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+export const LanguageProvider = ({ children }) => {
   // Initialize language from localStorage or default to Swedish
-  const [language, setLanguage] = useState<LanguageCode>(() => {
+  const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return (savedLanguage as LanguageCode) || 'sv';
+    return savedLanguage || 'sv';
   });
 
   // Get translations based on language
@@ -43,12 +31,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [language]);
 
   // Change language function
-  const changeLanguage = (newLanguage: LanguageCode) => {
+  const changeLanguage = (newLanguage) => {
     setLanguage(newLanguage);
   };
 
   // Translation function
-  const t = (key: keyof Translations) => translations[key] || key;
+  const t = (key) => translations[key] || key;
 
   return (
     <LanguageContext.Provider value={{ language, translations, changeLanguage, t }}>

@@ -1,19 +1,10 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-// Define theme types
-type ThemeMode = 'light' | 'dark';
-
-// Define context types
-interface ThemeContextType {
-  mode: ThemeMode;
-  toggleTheme: () => void;
-}
-
 // Create context with default values
-const ThemeContext = createContext<ThemeContextType>({
+const ThemeContext = createContext({
   mode: 'dark',
   toggleTheme: () => {},
 });
@@ -22,11 +13,11 @@ const ThemeContext = createContext<ThemeContextType>({
 export const useTheme = () => useContext(ThemeContext);
 
 // Theme Provider component
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }) => {
   // Initialize theme from localStorage or default to dark
-  const [mode, setMode] = useState<ThemeMode>(() => {
+  const [mode, setMode] = useState(() => {
     const savedMode = localStorage.getItem('themeMode');
-    return (savedMode as ThemeMode) || 'dark';
+    return savedMode || 'dark';
   });
 
   // Update localStorage when theme changes

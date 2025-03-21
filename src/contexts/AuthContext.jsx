@@ -1,23 +1,8 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-// Define user type
-interface User {
-  email: string;
-  name: string;
-}
-
-// Define context types
-interface AuthContextType {
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (email: string) => Promise<void>;
-  logout: () => void;
-}
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Create context with default values
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext({
   user: null,
   isAuthenticated: false,
   isLoading: true,
@@ -29,8 +14,8 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext);
 
 // Auth Provider component
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check for saved user on mount
@@ -43,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   // Simulate login
-  const login = async (email: string) => {
+  const login = async (email) => {
     // In a real app, this would be an API call
     setIsLoading(true);
     const mockUser = {

@@ -9,7 +9,6 @@ import {
   Container,
   CircularProgress,
   Alert,
-  FormControl,
   InputAdornment,
   IconButton
 } from '@mui/material';
@@ -46,7 +45,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!email || !email.includes('@')) {
