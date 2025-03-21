@@ -54,9 +54,9 @@ const translations = {
   addButton: "Lägg till",
   
   // Time Log
-  date: "Datum",
   hours: "Timmar",
   description: "Beskrivning",
+  totalHours: "Totalt timmar",
   
   // Work Diary
   entryDate: "Datum",
@@ -76,6 +76,10 @@ const translations = {
   darkMode: "Mörkt läge",
   lightMode: "Ljust läge",
   notifications: "Aviseringar",
+  appLanguage: "Applikationsspråk",
+  themeDescription: "Välj mellan ljust och mörkt läge",
+  notificationsDescription: "Aktivera eller inaktivera aviseringar",
+  enabled: "Aktiverad",
   
   // Status
   pending: "Väntande",
@@ -88,6 +92,21 @@ const translations = {
   building: "Byggrengöring",
   graffiti: "Klottersanering",
   general: "Allmän städning",
+  
+  // Actions
+  actions: "Åtgärder",
+  viewDetails: "Visa detaljer",
+  
+  // Generic
+  close: "Stäng",
+  cancel: "Avbryt",
+  type: "Typ",
+  phone: "Telefon",
+  
+  // Empty states
+  noMaterialsYet: "Inga material tillagda än",
+  noTimeEntriesYet: "Inga tidsregistreringar gjorda än",
+  noDiaryEntriesYet: "Inga dagboksanteckningar tillagda än",
 };
 
 export default translations;

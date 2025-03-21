@@ -163,9 +163,8 @@ const Dashboard = () => {
               {recentOrders.map((order) => (
                 <React.Fragment key={order.id}>
                   <ListItem 
-                    button 
                     onClick={() => navigate(`/orders/${order.id}`)}
-                    secondaryAction={<KeyboardArrowRight />}
+                    sx={{ cursor: 'pointer' }}
                   >
                     <ListItemAvatar>
                       <Avatar>
@@ -202,6 +201,7 @@ const Dashboard = () => {
                         </Grid>
                       }
                     />
+                    <KeyboardArrowRight />
                   </ListItem>
                   <Divider variant="inset" component="li" />
                 </React.Fragment>

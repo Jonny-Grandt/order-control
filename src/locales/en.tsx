@@ -54,9 +54,9 @@ const translations = {
   addButton: "Add",
   
   // Time Log
-  date: "Date",
   hours: "Hours",
   description: "Description",
+  totalHours: "Total Hours",
   
   // Work Diary
   entryDate: "Date",
@@ -76,6 +76,10 @@ const translations = {
   darkMode: "Dark Mode",
   lightMode: "Light Mode",
   notifications: "Notifications",
+  appLanguage: "Application Language",
+  themeDescription: "Choose between light and dark mode",
+  notificationsDescription: "Enable or disable notifications",
+  enabled: "Enabled",
   
   // Status
   pending: "Pending",
@@ -88,6 +92,21 @@ const translations = {
   building: "Building Cleaning",
   graffiti: "Graffiti Removal",
   general: "General Cleaning",
+  
+  // Actions
+  actions: "Actions",
+  viewDetails: "View Details",
+  
+  // Generic
+  close: "Close",
+  cancel: "Cancel",
+  type: "Type",
+  phone: "Phone",
+  
+  // Empty states
+  noMaterialsYet: "No materials added yet",
+  noTimeEntriesYet: "No time entries recorded yet",
+  noDiaryEntriesYet: "No diary entries added yet",
 };
 
 export default translations;
