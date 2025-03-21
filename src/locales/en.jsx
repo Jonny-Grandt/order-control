@@ -62,6 +62,17 @@ const translations = {
   entryDate: "Date",
   entry: "Entry",
   
+  // Photos
+  photos: "Photos",
+  takePhoto: "Take Photo",
+  delete: "Delete",
+  noPhotosYet: "No photos added yet",
+  
+  // Empty states
+  noMaterialsYet: "No materials added yet",
+  noTimeEntriesYet: "No time entries recorded yet",
+  noDiaryEntriesYet: "No diary entries added yet",
+  
   // AI Assistant
   askQuestion: "Ask a question...",
   send: "Send",
@@ -102,11 +113,6 @@ const translations = {
   cancel: "Cancel",
   type: "Type",
   phone: "Phone",
-  
-  // Empty states
-  noMaterialsYet: "No materials added yet",
-  noTimeEntriesYet: "No time entries recorded yet",
-  noDiaryEntriesYet: "No diary entries added yet",
 };
 
 export default translations;
