@@ -83,10 +83,10 @@ const App = () => (
       <ThemeProvider>
         <LanguageProvider>
           <TooltipProvider>
-            <Toaster />
-            <Sonner />
             <BrowserRouter>
               <AppContent />
+              <Toaster />
+              <Sonner />
             </BrowserRouter>
           </TooltipProvider>
         </LanguageProvider>
