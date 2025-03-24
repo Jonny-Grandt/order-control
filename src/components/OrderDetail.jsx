@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
@@ -47,7 +46,6 @@ import WorkDiary from './WorkDiary';
 import OrderPhotos from './OrderPhotos';
 import Map from './Map';
 
-// TabPanel component for handling tab content
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
@@ -79,21 +77,18 @@ const OrderDetail = () => {
   const [tabValue, setTabValue] = useState(0);
   const [mapOpen, setMapOpen] = useState(false);
   
-  // Fetch order details
   useEffect(() => {
     const fetchOrderDetails = async () => {
       if (!id) return;
       
       setLoading(true);
       try {
-        // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 500));
         
         const orderData = getOrderById(id);
         if (orderData) {
           setOrder(orderData);
         } else {
-          // Handle case where order is not found
           navigate('/orders');
         }
       } catch (error) {
@@ -106,12 +101,10 @@ const OrderDetail = () => {
     fetchOrderDetails();
   }, [id, navigate]);
   
-  // Handle tab change
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
   
-  // Mark order as complete
   const handleMarkComplete = async () => {
     if (!order) return;
     
@@ -125,7 +118,6 @@ const OrderDetail = () => {
     }
   };
   
-  // Get status color
   const getStatusColor = (status) => {
     switch (status) {
       case 'inProgress':
@@ -159,8 +151,7 @@ const OrderDetail = () => {
   }
   
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {/* Header section */}
+    <Box sx={{ flexGrow: 1, maxWidth: '100%', overflowX: 'hidden' }}>
       <Paper sx={{ p: 3, borderRadius: 3, mb: 3 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -202,11 +193,9 @@ const OrderDetail = () => {
         </Box>
       </Paper>
       
-      {/* Content section */}
-      <Grid container spacing={3}>
-        {/* Left sidebar */}
+      <Grid container spacing={3} sx={{ maxWidth: '100%', mx: 'auto' }}>
         <Grid item xs={12} md={4}>
-          <Card sx={{ borderRadius: 3, height: '100%' }}>
+          <Card sx={{ borderRadius: 3, height: '100%', maxWidth: '100%' }}>
             <CardHeader 
               title={t('clientInfo')}
               avatar={
@@ -270,7 +259,7 @@ const OrderDetail = () => {
             </CardContent>
           </Card>
           
-          <Card sx={{ borderRadius: 3, mt: 3 }}>
+          <Card sx={{ borderRadius: 3, mt: 3, maxWidth: '100%' }}>
             <CardHeader 
               title={t('orderDetails')}
               avatar={
@@ -288,9 +277,8 @@ const OrderDetail = () => {
           </Card>
         </Grid>
         
-        {/* Main content area */}
         <Grid item xs={12} md={8}>
-          <Paper sx={{ borderRadius: 3 }}>
+          <Paper sx={{ borderRadius: 3, maxWidth: '100%' }}>
             <Tabs 
               value={tabValue} 
               onChange={handleTabChange}
@@ -309,7 +297,7 @@ const OrderDetail = () => {
               <Tab label={t('photos')} id="order-tab-3" />
             </Tabs>
             
-            <Box sx={{ px: 3 }}>
+            <Box sx={{ px: 3, maxWidth: '100%' }}>
               <TabPanel value={tabValue} index={0}>
                 <MaterialsLog orderId={order.id} />
               </TabPanel>
@@ -330,7 +318,6 @@ const OrderDetail = () => {
         </Grid>
       </Grid>
       
-      {/* Map Dialog */}
       <Dialog 
         open={mapOpen} 
         onClose={() => setMapOpen(false)}

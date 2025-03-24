@@ -16,25 +16,26 @@ import { Email, Visibility, VisibilityOff } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Logo placeholder component (replace with your actual logo)
+// Logo component with the provided image
 const Logo = () => (
   <Box 
     sx={{ 
-      width: 150, 
-      height: 150, 
-      backgroundColor: 'primary.main', 
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      width: 200,
       margin: '0 auto',
       mb: 4,
-      color: 'white',
-      fontSize: '2rem',
-      fontWeight: 'bold'
+      display: 'flex',
+      justifyContent: 'center',
     }}
   >
-    CleanPro
+    <img 
+      src="/lovable-uploads/3cd86432-6f07-42b7-b8f4-ef054a4d16ad.png" 
+      alt="Skadeteknik" 
+      style={{ 
+        width: '100%', 
+        height: 'auto',
+        maxWidth: '100%' 
+      }}
+    />
   </Box>
 );
 
@@ -69,6 +70,8 @@ const Login = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          maxWidth: '100%',
+          px: 2,
         }}
       >
         <Paper
@@ -80,6 +83,7 @@ const Login = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            maxWidth: '100%',
           }}
         >
           <Logo />

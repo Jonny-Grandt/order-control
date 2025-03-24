@@ -5,7 +5,7 @@ const translations = {
   email: "Email",
   password: "Password",
   loginButton: "Login",
-  loginTitle: "Welcome to CleanPro",
+  loginTitle: "Welcome to Skadeteknik",
   loginSubtitle: "Professional cleaning services",
   
   // Navigation
@@ -67,6 +67,9 @@ const translations = {
   takePhoto: "Take Photo",
   delete: "Delete",
   noPhotosYet: "No photos added yet",
+  exportToPyramid: "Export to Pyramid",
+  syncingPhotos: "Syncing...",
+  photoExportSettings: "Photo Export Settings",
   
   // Empty states
   noMaterialsYet: "No materials added yet",
@@ -91,6 +94,13 @@ const translations = {
   themeDescription: "Choose between light and dark mode",
   notificationsDescription: "Enable or disable notifications",
   enabled: "Enabled",
+  disabled: "Disabled",
+  
+  // Photo Export
+  pyramidApiEndpoint: "Pyramid API Endpoint",
+  apiKey: "API Key",
+  autoSync: "Auto Sync Photos",
+  saveSettings: "Save Settings",
   
   // Status
   pending: "Pending",

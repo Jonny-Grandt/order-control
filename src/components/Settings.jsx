@@ -1,178 +1,111 @@
 
-import React from 'react';
-import {
-  Box,
-  Paper,
-  Typography,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Switch,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  FormControl,
-  FormLabel,
-  Button,
-  Card,
-  CardContent,
-  Avatar,
-  Grid
-} from '@mui/material';
+import React, { useState } from 'react';
 import { 
-  Translate, 
-  DarkMode, 
-  LightMode, 
-  Notifications, 
-  Person,
-  LogoutOutlined
-} from '@mui/icons-material';
-import { useAuth } from '../contexts/AuthContext';
+  Box, 
+  Card, 
+  CardContent, 
+  Typography, 
+  Switch, 
+  FormControlLabel,
+  Divider,
+  MenuItem,
+  Select,
+  Paper,
+  Grid,
+  Button
+} from '@mui/material';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useNavigate } from 'react-router-dom';
+import PhotoExportSettings from './PhotoExportSettings';
 
 const Settings = () => {
-  const { user, logout } = useAuth();
-  const { mode, toggleTheme } = useTheme();
-  const { t, language, changeLanguage } = useLanguage();
-  const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
+  const { language, changeLanguage, t } = useLanguage();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   
-  // Handle logout
-  const handleLogout = () => {
-    logout();
-    navigate('/');
+  const handleLanguageChange = (event) => {
+    changeLanguage(event.target.value);
   };
   
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ borderRadius: 3, height: '100%' }}>
-            <CardContent sx={{ textAlign: 'center', py: 4 }}>
-              <Avatar 
-                sx={{ 
-                  width: 100, 
-                  height: 100, 
-                  mx: 'auto', 
-                  bgcolor: 'primary.main',
-                  fontSize: '2.5rem'
-                }}
-              >
-                {user?.name?.charAt(0).toUpperCase() || 'U'}
-              </Avatar>
-              
-              <Typography variant="h5" sx={{ mt: 2, fontWeight: 'medium' }}>
-                {user?.name}
-              </Typography>
-              
-              <Typography variant="body1" color="text.secondary" gutterBottom>
-                {user?.email}
-              </Typography>
-              
-              <Button 
-                variant="outlined" 
-                color="error" 
-                startIcon={<LogoutOutlined />}
-                onClick={handleLogout}
-                sx={{ mt: 3 }}
-              >
-                {t('logout')}
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-        
-        <Grid item xs={12} md={8}>
-          <Paper sx={{ p: 3, borderRadius: 3 }}>
-            <Typography variant="h5" component="h1" gutterBottom fontWeight="medium">
-              {t('settings')}
-            </Typography>
-            
-            <Divider sx={{ my: 2 }} />
-            
-            <List>
-              {/* Language Settings */}
-              <ListItem sx={{ py: 2 }}>
-                <ListItemIcon>
-                  <Translate />
-                </ListItemIcon>
-                <ListItemText 
-                  primary={t('language')}
-                  secondary={t('appLanguage')}
-                />
-                <FormControl>
-                  <RadioGroup
-                    row
-                    value={language}
-                    onChange={(e) => changeLanguage(e.target.value as 'en' | 'sv')}
-                  >
-                    <FormControlLabel 
-                      value="en" 
-                      control={<Radio />} 
-                      label="English" 
-                    />
-                    <FormControlLabel 
-                      value="sv" 
-                      control={<Radio />} 
-                      label="Svenska" 
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </ListItem>
-              
-              <Divider variant="inset" component="li" />
-              
-              {/* Theme Settings */}
-              <ListItem sx={{ py: 2 }}>
-                <ListItemIcon>
-                  {mode === 'dark' ? <DarkMode /> : <LightMode />}
-                </ListItemIcon>
-                <ListItemText 
-                  primary={t('theme')}
-                  secondary={t('themeDescription')}
-                />
+    <Box sx={{ maxWidth: '100%', overflow: 'hidden' }}>
+      <Typography variant="h4" component="h1" gutterBottom fontWeight="medium">
+        {t('settings')}
+      </Typography>
+      
+      <Box sx={{ mt: 3 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, overflow: 'hidden', maxWidth: '100%' }}>
+              <CardContent>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  {t('appLanguage')}
+                </Typography>
+                <Divider sx={{ mb: 3 }} />
+                <Select
+                  value={language}
+                  onChange={handleLanguageChange}
+                  fullWidth
+                  sx={{ mb: 2 }}
+                >
+                  <MenuItem value="en">English</MenuItem>
+                  <MenuItem value="sv">Svenska</MenuItem>
+                </Select>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, overflow: 'hidden', maxWidth: '100%' }}>
+              <CardContent>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  {t('theme')}
+                </Typography>
+                <Divider sx={{ mb: 3 }} />
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  {t('themeDescription')}
+                </Typography>
                 <FormControlLabel
                   control={
                     <Switch
-                      checked={mode === 'dark'}
+                      checked={theme === 'dark'}
                       onChange={toggleTheme}
-                      color="primary"
                     />
                   }
-                  label={mode === 'dark' ? t('darkMode') : t('lightMode')}
-                  labelPlacement="start"
+                  label={theme === 'dark' ? t('darkMode') : t('lightMode')}
                 />
-              </ListItem>
-              
-              <Divider variant="inset" component="li" />
-              
-              {/* Notifications Settings */}
-              <ListItem sx={{ py: 2 }}>
-                <ListItemIcon>
-                  <Notifications />
-                </ListItemIcon>
-                <ListItemText 
-                  primary={t('notifications')}
-                  secondary={t('notificationsDescription')}
-                />
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, overflow: 'hidden', maxWidth: '100%' }}>
+              <CardContent>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  {t('notifications')}
+                </Typography>
+                <Divider sx={{ mb: 3 }} />
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  {t('notificationsDescription')}
+                </Typography>
                 <FormControlLabel
                   control={
                     <Switch
-                      defaultChecked
-                      color="primary"
+                      checked={notificationsEnabled}
+                      onChange={() => setNotificationsEnabled(!notificationsEnabled)}
                     />
                   }
-                  label={t('enabled')}
-                  labelPlacement="start"
+                  label={notificationsEnabled ? t('enabled') : t('disabled')}
                 />
-              </ListItem>
-            </List>
-          </Paper>
+              </CardContent>
+            </Card>
+          </Grid>
+          
+          <Grid item xs={12}>
+            <PhotoExportSettings />
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };
