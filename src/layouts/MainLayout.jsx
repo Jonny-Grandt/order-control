@@ -15,20 +15,9 @@ const MainLayout = () => {
       overflow: 'hidden'
     }}>
       <Navbar />
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: { xs: 2, sm: 3 }, // Responsive padding
-          mt: '64px', // AppBar height
-          width: '100%',
-          maxWidth: '100%',
-          overflowX: 'hidden',
-          overflowY: 'auto'
-        }}
-      >
-        <Outlet />
-      </Box>
+      {/* We don't need to add extra styling here since the Navbar component
+          already includes the content wrapper with proper spacing */}
+      <Outlet />
     </Box>
   );
 };
