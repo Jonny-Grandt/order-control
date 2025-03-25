@@ -4,6 +4,8 @@ import { Box } from '@mui/material';
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
+  
+  console.log(`TabPanel rendering: value=${value}, index=${index}`);
 
   return (
     <div

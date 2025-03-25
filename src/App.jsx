@@ -22,10 +22,15 @@ import OrderDetail from "./components/OrderDetail.jsx";
 import AIAssistant from "./components/AIAssistant.jsx";
 import Settings from "./components/Settings.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import Index from "./pages/Index.jsx"; // Import the Index component
+
+// Add console logs for debugging
+console.log("App.jsx is loading");
 
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
+  console.log("ProtectedRoute - isAuthenticated:", isAuthenticated, "isLoading:", isLoading);
   
   if (isLoading) {
     return null; // Or a loading spinner
@@ -41,6 +46,7 @@ const ProtectedRoute = ({ children }) => {
 // Public Route component (redirects to dashboard if logged in)
 const PublicRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
+  console.log("PublicRoute - isAuthenticated:", isAuthenticated, "isLoading:", isLoading);
   
   if (isLoading) {
     return null; // Or a loading spinner
@@ -72,6 +78,9 @@ const AppContent = () => {
         <Route path="/ai-assistant" element={<AIAssistant />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
+      
+      {/* Index page for root access */}
+      <Route path="/index" element={<Index />} />
       
       {/* Fallback */}
       <Route path="*" element={<NotFound />} />
