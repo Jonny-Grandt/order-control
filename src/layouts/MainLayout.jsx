@@ -6,17 +6,24 @@ import Navbar from '../components/Navbar';
 
 const MainLayout = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ 
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+      width: '100%',
+      overflow: 'hidden'
+    }}>
       <Navbar />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          ml: { sm: '240px' }, // Match drawer width
+          p: { xs: 2, sm: 3 }, // Responsive padding
           mt: '64px', // AppBar height
-          width: { sm: `calc(100% - 240px)` },
-          minHeight: 'calc(100vh - 64px)',
+          width: '100%',
+          maxWidth: '100%',
+          overflowX: 'hidden',
+          overflowY: 'auto'
         }}
       >
         <Outlet />

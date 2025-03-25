@@ -7,6 +7,8 @@ import { AspectRatio } from './ui/aspect-ratio';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const CameraCapture = ({ onCapture, onClose }) => {
+  console.log("Rendering CameraCapture component");
+  
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [stream, setStream] = useState(null);

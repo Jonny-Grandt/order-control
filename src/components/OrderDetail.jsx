@@ -109,8 +109,8 @@ const OrderDetail = () => {
       />
       
       {/* Content section */}
-      <Grid container spacing={3} sx={{ maxWidth: '100%', mx: 'auto' }}>
-        {/* Left sidebar */}
+      <Grid container spacing={2} sx={{ maxWidth: '100%', mx: 'auto' }}>
+        {/* Left sidebar - stack vertically on mobile */}
         <Grid item xs={12} md={4}>
           <ClientInfo order={order} onOpenMap={() => setMapOpen(true)} />
           <OrderDescription order={order} />

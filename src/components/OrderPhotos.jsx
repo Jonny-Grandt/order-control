@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Camera, Trash2, Upload } from 'lucide-react';
@@ -15,12 +15,20 @@ const OrderPhotos = ({ orderId }) => {
   const { t } = useLanguage();
   const { toast } = useToast();
   const isMobile = useIsMobile();
-  const [photos, setPhotos] = useState(getPhotosByOrderId(orderId) || []);
+  const [photos, setPhotos] = useState([]);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [syncing, setSyncing] = useState(false);
   
+  // Fetch photos on component mount
+  useEffect(() => {
+    const fetchedPhotos = getPhotosByOrderId(orderId) || [];
+    console.log("Fetched photos for order", orderId, fetchedPhotos);
+    setPhotos(fetchedPhotos);
+  }, [orderId]);
+  
   const handleCapture = (photoData) => {
+    console.log("Photo captured:", photoData.substring(0, 50) + "...");
     const newPhoto = addOrderPhoto({
       orderId,
       imageData: photoData,
@@ -89,24 +97,31 @@ const OrderPhotos = ({ orderId }) => {
     }
   };
   
+  console.log("Rendering OrderPhotos component, photos:", photos.length);
+  
   return (
     <>
       <div className="space-y-4 max-w-full">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap gap-2">
           <h3 className="text-lg font-medium">{t('photos')}</h3>
-          <div className="space-x-2">
+          <div className="flex gap-2 flex-wrap">
             {photos.length > 0 && (
               <Button 
                 variant="outline" 
-                size="sm" 
+                size={isMobile ? "sm" : "default"}
                 onClick={() => syncPhotos()}
                 disabled={syncing}
+                className="whitespace-nowrap"
               >
                 <Upload className="mr-2 h-4 w-4" />
                 {syncing ? "Syncing..." : "Export to Pyramid"}
               </Button>
             )}
-            <Button onClick={() => setCameraOpen(true)} size="sm">
+            <Button 
+              onClick={() => setCameraOpen(true)} 
+              size={isMobile ? "sm" : "default"}
+              className="whitespace-nowrap"
+            >
               <Camera className="mr-2 h-4 w-4" />
               {t('takePhoto')}
             </Button>
@@ -157,11 +172,11 @@ const OrderPhotos = ({ orderId }) => {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center flex-wrap gap-2">
                 <div className="text-sm text-muted-foreground">
                   {new Date(selectedPhoto.date).toLocaleString()}
                 </div>
-                <div className="space-x-2">
+                <div className="flex gap-2">
                   <Button 
                     variant="outline" 
                     size="sm"

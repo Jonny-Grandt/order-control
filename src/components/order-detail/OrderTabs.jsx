@@ -4,7 +4,9 @@ import {
   Box,
   Paper,
   Tabs,
-  Tab
+  Tab,
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
 import TabPanel from './TabPanel';
 import MaterialsLog from '../MaterialsLog';
@@ -16,22 +18,33 @@ import { useLanguage } from '../../contexts/LanguageContext';
 const OrderTabs = ({ orderId }) => {
   const { t } = useLanguage();
   const [tabValue, setTabValue] = React.useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
   return (
-    <Paper sx={{ borderRadius: 3, maxWidth: '100%' }}>
+    <Paper sx={{ 
+      borderRadius: 3, 
+      maxWidth: '100%',
+      overflow: 'hidden' // Prevent overflow
+    }}>
       <Tabs 
         value={tabValue} 
         onChange={handleTabChange}
-        variant="fullWidth"
+        variant={isMobile ? "scrollable" : "fullWidth"}
+        scrollButtons={isMobile ? "auto" : false}
         sx={{ 
           borderBottom: 1, 
           borderColor: 'divider',
           '& .MuiTabs-indicator': {
             height: 3,
+          },
+          '& .MuiTab-root': {
+            minWidth: isMobile ? '80px' : '120px', // Make tabs narrower on mobile
+            px: isMobile ? 1 : 2,
           }
         }}
       >
@@ -41,7 +54,10 @@ const OrderTabs = ({ orderId }) => {
         <Tab label={t('photos')} id="order-tab-3" />
       </Tabs>
       
-      <Box sx={{ px: 3, maxWidth: '100%' }}>
+      <Box sx={{ 
+        px: { xs: 1, sm: 2, md: 3 }, // Responsive padding
+        maxWidth: '100%'
+      }}>
         <TabPanel value={tabValue} index={0}>
           <MaterialsLog orderId={orderId} />
         </TabPanel>
