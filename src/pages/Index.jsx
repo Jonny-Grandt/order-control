@@ -1,12 +1,21 @@
 
-import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, Typography, Button, Container, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const navigate = useNavigate();
   
   console.log("Rendering Index page");
+  
+  // Automatically navigate to the login page after a short delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/');
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }, [navigate]);
   
   return (
     <Container maxWidth="md" sx={{ 
@@ -29,17 +38,19 @@ const Index = () => {
           CleanPro Portal
         </Typography>
         <Typography variant="body1" paragraph>
-          Welcome to the CleanPro management portal. Please log in to access your dashboard.
+          Welcome to the CleanPro management portal. You are being redirected to the login page...
         </Typography>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          size="large"
-          onClick={() => navigate('/')}
-          sx={{ mt: 2 }}
-        >
-          Go to Login
-        </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <CircularProgress size={24} sx={{ mr: 2 }} />
+          <Button 
+            variant="contained" 
+            color="primary" 
+            size="large"
+            onClick={() => navigate('/')}
+          >
+            Go to Login
+          </Button>
+        </Box>
       </Box>
     </Container>
   );

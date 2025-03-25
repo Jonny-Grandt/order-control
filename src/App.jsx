@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Toaster } from "./components/ui/toaster.jsx";
 import { Toaster as Sonner } from "./components/ui/sonner.jsx";
 import { TooltipProvider } from "./components/ui/tooltip.jsx";
@@ -22,9 +22,8 @@ import OrderDetail from "./components/OrderDetail.jsx";
 import AIAssistant from "./components/AIAssistant.jsx";
 import Settings from "./components/Settings.jsx";
 import NotFound from "./pages/NotFound.jsx";
-import Index from "./pages/Index.jsx"; // Import the Index component
+import Index from "./pages/Index.jsx";
 
-// Add console logs for debugging
 console.log("App.jsx is loading");
 
 // Protected Route component
@@ -33,7 +32,7 @@ const ProtectedRoute = ({ children }) => {
   console.log("ProtectedRoute - isAuthenticated:", isAuthenticated, "isLoading:", isLoading);
   
   if (isLoading) {
-    return null; // Or a loading spinner
+    return <div>Loading...</div>;
   }
   
   if (!isAuthenticated) {
@@ -49,7 +48,7 @@ const PublicRoute = ({ children }) => {
   console.log("PublicRoute - isAuthenticated:", isAuthenticated, "isLoading:", isLoading);
   
   if (isLoading) {
-    return null; // Or a loading spinner
+    return <div>Loading...</div>;
   }
   
   if (isAuthenticated) {
@@ -64,27 +63,27 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   console.log("Rendering AppContent");
   return (
-    <Routes>
-      {/* Public routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
-      </Route>
-      
-      {/* Protected routes */}
-      <Route element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/orders" element={<OrderList />} />
-        <Route path="/orders/:id" element={<OrderDetail />} />
-        <Route path="/ai-assistant" element={<AIAssistant />} />
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-      
-      {/* Index page for root access */}
-      <Route path="/index" element={<Index />} />
-      
-      {/* Fallback */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        {/* Public routes */}
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+        </Route>
+        
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/orders" element={<OrderList />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
+          <Route path="/ai-assistant" element={<AIAssistant />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+        
+        {/* Index page for root access */}
+        <Route path="/index" element={<Index />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   );
 };
 
