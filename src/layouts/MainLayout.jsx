@@ -2,9 +2,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar.jsx';
 
 const MainLayout = () => {
+  console.log("Rendering MainLayout");
   return (
     <Box sx={{ 
       display: 'flex',

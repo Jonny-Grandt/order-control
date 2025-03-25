@@ -71,6 +71,8 @@ export const ThemeProvider = ({ children }) => {
     },
   });
 
+  console.log("ThemeProvider rendering, mode:", mode);
+
   return (
     <ThemeContext.Provider value={{ mode, toggleTheme }}>
       <MuiThemeProvider theme={theme}>

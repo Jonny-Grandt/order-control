@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Paper,
@@ -8,16 +8,17 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material';
-import TabPanel from './TabPanel';
-import MaterialsLog from '../MaterialsLog';
-import TimeLog from '../TimeLog';
-import WorkDiary from '../WorkDiary';
-import OrderPhotos from '../OrderPhotos';
-import { useLanguage } from '../../contexts/LanguageContext';
+import TabPanel from './TabPanel.jsx';
+import MaterialsLog from '../MaterialsLog.jsx';
+import TimeLog from '../TimeLog.jsx';
+import WorkDiary from '../WorkDiary.jsx';
+import OrderPhotos from '../OrderPhotos.jsx';
+import { useLanguage } from '../../contexts/LanguageContext.jsx';
 
 const OrderTabs = ({ orderId }) => {
+  console.log("Rendering OrderTabs component with orderId:", orderId);
   const { t } = useLanguage();
-  const [tabValue, setTabValue] = React.useState(0);
+  const [tabValue, setTabValue] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
