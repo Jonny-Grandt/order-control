@@ -1,4 +1,3 @@
-
 import React, { Suspense } from 'react';
 import { Toaster } from "./components/ui/toaster.jsx";
 import { Toaster as Sonner } from "./components/ui/sonner.jsx";
@@ -17,7 +16,7 @@ import AuthLayout from "./layouts/AuthLayout.jsx";
 // Pages
 import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard.jsx";
-import OrderList from "./components/OrderList.jsx";
+import OrderList from "./components/OrderList.tsx";
 import OrderDetail from "./components/OrderDetail.jsx";
 import AIAssistant from "./components/AIAssistant.jsx";
 import Settings from "./components/Settings.jsx";
