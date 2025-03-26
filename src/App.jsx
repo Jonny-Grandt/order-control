@@ -1,3 +1,4 @@
+
 import React, { Suspense } from 'react';
 import { Toaster } from "./components/ui/toaster.jsx";
 import { Toaster as Sonner } from "./components/ui/sonner.jsx";
@@ -18,7 +19,7 @@ import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import OrderList from "./components/OrderList.tsx";
 import OrderDetail from "./components/OrderDetail.jsx";
-import AIAssistant from "./components/AIAssistant.jsx";
+import AIAssistant from "./components/AIAssistant.tsx";
 import Settings from "./components/Settings.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Index from "./pages/Index.jsx";
