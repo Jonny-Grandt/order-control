@@ -9,9 +9,9 @@ import {
   useTheme
 } from '@mui/material';
 import TabPanel from './TabPanel.jsx';
-import MaterialsLog from '../MaterialsLog.jsx';
-import TimeLog from '../TimeLog.jsx';
-import WorkDiary from '../WorkDiary.jsx';
+import MaterialsLog from '../MaterialsLog.tsx';
+import TimeLog from '../TimeLog.tsx';
+import WorkDiary from '../WorkDiary.tsx';
 import OrderPhotos from '../OrderPhotos.jsx';
 import { useLanguage } from '../../contexts/LanguageContext.jsx';
 
