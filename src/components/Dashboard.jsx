@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Box,
@@ -30,7 +29,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { useLanguage } from '../contexts/LanguageContext.jsx';
-import { getOrders } from '../services/orderService.jsx';
+import { getOrders } from '../services/orderService.ts';
 
 const Dashboard = () => {
   console.log("Rendering Dashboard component");
